@@ -1,0 +1,36 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
+	"files": {
+		"includes": [
+			"**",
+			"!**/node_modules",
+			"!**/prisma/migrations",
+			"!**/*.db",
+			"!**/*.db-journal",
+			"!**/test-results"
+		]
+	},
+	"formatter": {
+		"indentStyle": "tab"
+	},
+	"linter": {
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"noUnusedImports": "warn",
+				"noUnusedVariables": "warn"
+			},
+			"suspicious": {
+				"noUnknownAtRules": "off"
+			},
+			"a11y": {
+				"useSemanticElements": "off"
+			}
+		}
+	},
+	"css": {
+		"linter": {
+			"enabled": true
+		}
+	}
+}

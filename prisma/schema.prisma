@@ -1,0 +1,26 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Route {
+  id             String   @id @default(cuid())
+  name           String
+  description    String?
+  activityType   String   @default("cycling") // "cycling" | "running"
+
+  geojson        String // GeoJSON FeatureCollection as JSON string
+  waypoints      String // JSON array of [lng, lat] coordinate pairs
+
+  distanceMeters   Float
+  elevationGainM   Float   @default(0)
+  elevationLossM   Float   @default(0)
+  elevationProfile String? // JSON array of sampled elevations (m); null = not yet computed
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

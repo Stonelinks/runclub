@@ -1,0 +1,225 @@
+body {
+	margin: 0;
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---- Map page shell (editor + detail) ---------------------------------- */
+
+.map-page {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	overflow: hidden;
+}
+
+@supports (height: 100dvh) {
+	.map-page {
+		height: 100dvh;
+	}
+}
+
+.map-page-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.75rem 1rem;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.map-page-title {
+	min-width: 0;
+}
+
+.map-page-title h1 {
+	margin: 0;
+	font-size: 1.25rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.map-page-subtitle {
+	margin: 0.25rem 0 0;
+	font-size: 0.875rem;
+	color: #666;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.map-page-actions {
+	display: flex;
+	gap: 0.5rem;
+	flex-shrink: 0;
+}
+
+.map-page-body {
+	display: flex;
+	flex: 1;
+	min-height: 0;
+	overflow: hidden;
+}
+
+.map-page-map {
+	flex: 1;
+	position: relative;
+	min-width: 0;
+	min-height: 0;
+}
+
+.map-page-panel {
+	display: flex;
+	flex-direction: column;
+	width: 320px;
+	flex-shrink: 0;
+	border-left: 1px solid #e5e7eb;
+	background: white;
+	min-height: 0;
+}
+
+.map-page-panel-handle {
+	display: none;
+}
+
+.map-page-panel-content {
+	flex: 1;
+	overflow-y: auto;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.map-page-field {
+	font-size: 0.875rem;
+}
+
+/* Waypoint list: desktop keeps the grip + a bounded scroll box */
+.waypoint-list-items {
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+.waypoint-icon-btn {
+	display: inline-flex;
+}
+
+/* Move buttons only matter where drag-and-drop cannot work (touch) */
+.waypoint-move {
+	display: none;
+}
+
+/* ---- Phone layout ------------------------------------------------------ */
+
+@media (max-width: 767px) {
+	.map-page-header {
+		padding: 0.5rem 0.75rem;
+	}
+
+	.map-page-subtitle {
+		display: none;
+	}
+
+	.map-page-actions button {
+		padding-left: 0.75rem;
+		padding-right: 0.75rem;
+	}
+
+	.map-page-body {
+		flex-direction: column;
+	}
+
+	.map-page-panel {
+		width: 100%;
+		border-left: none;
+		border-top: 1px solid #e5e7eb;
+		box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+		padding-bottom: env(safe-area-inset-bottom);
+		transition: max-height 0.2s ease-out;
+		max-height: 56px;
+	}
+
+	.map-page-panel.is-expanded {
+		max-height: 60dvh;
+	}
+
+	.map-page-panel-handle {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		width: 100%;
+		min-height: 56px;
+		padding: 0 1rem;
+		border: none;
+		background: white;
+		font: inherit;
+		text-align: left;
+		cursor: pointer;
+		flex-shrink: 0;
+	}
+
+	.map-page-panel-grip {
+		position: absolute;
+		left: 50%;
+		top: 6px;
+		width: 36px;
+		height: 4px;
+		margin-left: -18px;
+		border-radius: 2px;
+		background: #d1d5db;
+	}
+
+	.map-page-panel {
+		position: relative;
+	}
+
+	.map-page-panel-peek {
+		flex: 1;
+		min-width: 0;
+		font-size: 1rem;
+		font-weight: 600;
+	}
+
+	.map-page-panel-chevron {
+		font-size: 0.75rem;
+		color: #6b7280;
+	}
+
+	.map-page-panel-content {
+		display: none;
+	}
+
+	.map-page-panel.is-expanded .map-page-panel-content {
+		display: flex;
+	}
+
+	/* 16px inputs stop iOS Safari from zooming the page on focus */
+	.map-page-field {
+		font-size: 16px;
+	}
+
+	/* Comfortable tap targets */
+	.map-page button,
+	.route-card button,
+	.route-list-new {
+		min-height: 44px;
+	}
+
+	.waypoint-list-items {
+		max-height: none;
+		overflow: visible;
+	}
+}
+
+/* Touch devices: drag-and-drop never fires, show the move buttons instead */
+@media (hover: none) {
+	.waypoint-grip {
+		display: none;
+	}
+
+	.waypoint-move {
+		display: inline-flex;
+	}
+}

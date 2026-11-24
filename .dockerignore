@@ -1,0 +1,8 @@
+node_modules
+prisma/dev.db
+test-results
+playwright-report
+e2e
+tests
+.git
+.DS_Store

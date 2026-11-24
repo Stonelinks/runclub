@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8711:3000"
+    volumes:
+      - db-data:/app/data
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/data/runclub.db
+      - OSRM_FOOT_URL=http://osrm-foot:5000
+      - OSRM_BIKE_URL=http://osrm-bike:5000
+    restart: unless-stopped
+
+  osrm-foot:
+    image: osrm/osrm-backend:latest
+    command: osrm-routed --algorithm mld /data/bay-area.osrm
+    volumes:
+      - osrm-foot-data:/data:ro
+    ports:
+      - "5001:5000"
+    restart: unless-stopped
+
+  osrm-bike:
+    image: osrm/osrm-backend:latest
+    command: osrm-routed --algorithm mld /data/bay-area.osrm
+    volumes:
+      - osrm-bike-data:/data:ro
+    ports:
+      - "5002:5000"
+    restart: unless-stopped
+
+volumes:
+  db-data:
+  osrm-foot-data:
+  osrm-bike-data:
