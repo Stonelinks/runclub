@@ -37,7 +37,7 @@ The app runs at http://localhost:3000.
 docker compose up --build
 ```
 
-This builds the app and runs it on port 8711 with a persistent SQLite volume.
+This builds the app and runs it on port 8711 with a persistent SQLite volume. Routing needs OSRM data prepared first — see [DEPLOYMENT.md](DEPLOYMENT.md) for full self-hosting instructions, including OpenStreetMap/OSRM setup for your own region.
 
 ## Testing
 

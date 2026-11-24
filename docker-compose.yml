@@ -16,7 +16,7 @@ services:
     image: osrm/osrm-backend:latest
     command: osrm-routed --algorithm mld /data/bay-area.osrm
     volumes:
-      - osrm-foot-data:/data:ro
+      - ./osrm-data/foot:/data:ro
     ports:
       - "5001:5000"
     restart: unless-stopped
@@ -25,12 +25,10 @@ services:
     image: osrm/osrm-backend:latest
     command: osrm-routed --algorithm mld /data/bay-area.osrm
     volumes:
-      - osrm-bike-data:/data:ro
+      - ./osrm-data/bike:/data:ro
     ports:
       - "5002:5000"
     restart: unless-stopped
 
 volumes:
   db-data:
-  osrm-foot-data:
-  osrm-bike-data:
